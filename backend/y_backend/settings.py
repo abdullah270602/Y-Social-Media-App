@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,13 +34,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Custom User Model Config
+AUTH_USER_MODEL = "accounts.User"
+
 # Simple JWT config
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME' : timedelta(days=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=180),
     'ROTATE_REFRESH_TOKEN' : False,
 }
-
+    
 # Rest framework config
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -65,7 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Local Apps
-    
+    'accounts',
     
     # Packages
     'rest_framework',
@@ -157,3 +166,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email Config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+
+# settings.py
+FRONTEND_URL = 'http://localhost:5173/'
