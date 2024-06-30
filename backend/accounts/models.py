@@ -1,3 +1,5 @@
+import random
+import string
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 from django.utils import timezone
@@ -34,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True, blank=True, null=True,)
     full_name = models.CharField(max_length=30, blank=False, null=False,)
     email = models.EmailField(unique=True, blank=False, null=False)
-    password = models.CharField(max_length=128, blank=False, null=False)  # `AbstractBaseUser` manages password hashing and validation.
+    password = models.CharField(max_length=128, blank=False, null=False) 
     profile_picture = models.ImageField(upload_to="profile_pictures", blank=True, null=True)
     profile_bio = models.TextField(blank=True, default="")
     date_of_birth = models.DateField(blank=True, null=True)
@@ -53,6 +55,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.full_name
+    
+    def generate_random_username(self):
+        name_part = ''.join(e for e in self.full_name if e.isalnum())
+        random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=5))
+        return f"{name_part}_{random_suffix}"
     
     class Meta:
         ordering = ["-date_joined"]
