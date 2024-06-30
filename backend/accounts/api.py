@@ -78,25 +78,3 @@ def check_username_exists(request):
 
     return JsonResponse({"exists": email_exists})
 
-
-@api_view(["POST"])
-@permission_classes([])
-def submit_username(request):
-    username = request.data.get("username")
-
-    # Check for invalid characters
-    invalid_chars = set("@(),`&%$#!*./\"';~{}")
-    if any(char in invalid_chars for char in username):
-        raise serializers.ValidationError("Username contains invalid characters.")
-
-    # Check if username already exists
-    if User.objects.filter(username=username).exists():
-        raise serializers.ValidationError("Username already exists.")
-
-    user = request.user
-
-    user.username = username
-    user.save()
-
-    # Return the validated username
-    return Response(username, status=status.HTTP_201_OK)
