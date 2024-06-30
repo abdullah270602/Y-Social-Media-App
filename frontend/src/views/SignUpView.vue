@@ -12,7 +12,7 @@
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
-        </div>  
+        </div>
         <h1
           class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
         >
@@ -33,9 +33,11 @@
               @input="validateName"
               required
             />
-            <span v-if="errors.full_name" class="text-red-500 text-xs focus:ring-red-500">{{
-              errors.full_name
-            }}</span>
+            <span
+              v-if="errors.full_name"
+              class="text-red-500 text-xs focus:ring-red-500"
+              >{{ errors.full_name }}</span
+            >
           </div>
           <div>
             <label
@@ -127,11 +129,13 @@
           </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
             Already have an account?
-            <a
-              href="#"
+
+            <RouterLink
+              :to="{ name: 'SignIn' }"
               class="font-medium text-blue-600 hover:underline dark:text-primary-500"
-              >Sign in</a
             >
+              Sign in
+            </RouterLink>
           </p>
         </form>
       </div>
@@ -219,7 +223,6 @@ export default {
       }
     },
 
-
     validateEmailFormat(email) {
       const re =
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/i;
@@ -227,7 +230,7 @@ export default {
     },
 
     async submitForm() {
-      console.log(this.form.date_of_birth)
+      console.log(this.form.date_of_birth);
 
       axios
         .post("/api/signup/", this.form)
@@ -240,7 +243,7 @@ export default {
             // this.form.password2 = "";
             this.form.date_of_birth = "";
 
-            this.$router.push({ name: 'emailSent' })
+            this.$router.push({ name: "emailSent" });
           } else {
             alert("Signup failed: " + response.data.errors); // add toast here
           }

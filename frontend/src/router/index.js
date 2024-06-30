@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue'
 import EmailSentView from '@/views/EmailSentView.vue'
 import SelectUsername from '@/views/SelectUsername.vue'
 import VerificationSuccessfulView from '@/views/VerificationSuccessfulView.vue'
+import SignInView from '@/views/SignInView.vue' 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/VerificationSuccessful',
       name: 'VerificationSuccessful',
       component: VerificationSuccessfulView
+    },
+    {
+      path: '/SignIn',
+      name: 'SignIn',
+      component: SignInView
     },
     // {
     //   path: '/about',

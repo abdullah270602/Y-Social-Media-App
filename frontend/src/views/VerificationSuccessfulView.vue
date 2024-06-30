@@ -8,9 +8,11 @@
                 <span class="sr-only">Success</span>
             </div>
             <h4 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Verification Successful</h4>
-            <a href="#" class="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-900">
-                Sign in
-            </a>
+            <RouterLink
+              :to="{ name: 'SignIn' }"
+              class="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-900"            >
+              Sign in
+            </RouterLink>
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@ from y_backend import settings
 from .utils import send_verification_email
 from .models import EmailVerification, User
 from rest_framework.response import Response  # type: ignore
-from .serializers import SignupSerializer
+from .serializers import SignupSerializer, UserInfoSerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes  # type: ignore
 from rest_framework import status  # type: ignore
 from rest_framework.permissions import AllowAny  # type: ignore
@@ -78,3 +78,28 @@ def check_username_exists(request):
 
     return JsonResponse({"exists": email_exists})
 
+
+@api_view(['GET'])
+def get_user_info(request):
+    # Retrieve authenticated user instance
+        user = request.user
+
+        # Update user fields directly from database instance
+        user_data = {
+            'username': user.username,
+            'full_name': user.full_name,
+            'email': user.email,
+            'date_of_birth': user.date_of_birth,
+        }
+
+        # Serialize and validate the updated data
+        serializer = UserInfoSerializer(instance=user, data=user_data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+@api_view(['GET'])
+def home(request):
+    return Response(status=status.HTTP_200_OK)

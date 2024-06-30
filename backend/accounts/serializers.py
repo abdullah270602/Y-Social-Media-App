@@ -12,6 +12,7 @@ class SignupSerializer(serializers.ModelSerializer):
         model = User
         fields = ['full_name', 'email', 'password','date_of_birth']
 
+
     def validate_email(self, value):    
         """
         Check that the email is not already in use.
@@ -19,6 +20,7 @@ class SignupSerializer(serializers.ModelSerializer):
         if User.objects.filter(email=value).exists():
             raise serializers.ValidationError("This email is already in use.")
         return value
+
 
     def create(self, validated_data):
         """
@@ -42,3 +44,9 @@ class SignupSerializer(serializers.ModelSerializer):
         
         
         return user
+
+
+class UserInfoSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = User
+        fields = ['full_name', 'email', 'username','date_of_birth']
