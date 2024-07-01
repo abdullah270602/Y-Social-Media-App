@@ -22,11 +22,11 @@
                   }"
                   >{{ post.created_by.full_name }}
                 </h1>
-                <span
-                  class="ml-1 text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
-                >
-                  {{post.created_by.username}} <span> . </span>{{ post.time_since_creation }}
-                </span>
+                  <span
+                    class="ml-2 text-sm  font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
+                  >
+                  <span>@</span>{{post.created_by.username}} <span> . </span>{{ post.time_since_creation }}
+                  </span>
               </p>
             </div>
           </div>
