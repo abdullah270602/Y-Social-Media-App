@@ -16,7 +16,7 @@ def create_post(request):
         post = form.save(commit=False)
         post.created_by = request.user
         post.save()
-        serializer = PostSerializers(post, context={'request': request})
+        serializer = PostSerializers(post, context={'user_id': request.user.id})
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
