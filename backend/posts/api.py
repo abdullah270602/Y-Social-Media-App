@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from posts.utlis import has_user_liked_post
-from posts.models import Post, PostLike
+from posts.utlis import has_user_bookmarked_post, has_user_liked_post
+from posts.models import Post, PostBookmark, PostLike
 from posts.serializers import PostSerializers
 from posts.forms import PostForm
 
@@ -49,5 +49,23 @@ def toggle_post_like(request, postId):
             post_like = PostLike(liked_by=user, post=post)
             post_like.save()
             return Response({'context': 'liked'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    
+@api_view(['POST'])
+def toggle_post_bookmark(request, postId):
+    user = request.user
+    post = get_object_or_404(Post, id=postId)
+
+    try:
+        if has_user_bookmarked_post(user, post):
+            post_bookmark = PostBookmark.objects.get(bookmarked_by=user, post=post)
+            post_bookmark.delete()
+            return Response({'context': 'unbookmarked'}, status=status.HTTP_200_OK)
+        else:
+            post_bookmark = PostBookmark(bookmarked_by=user, post=post)
+            post_bookmark.save()
+            return Response({'context': 'bookmarked'}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

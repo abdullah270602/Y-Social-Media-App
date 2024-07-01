@@ -57,3 +57,10 @@ class PostLike(models.Model):
         Post, related_name="post_likes", on_delete=models.CASCADE, db_index=True
     )
     liked_at = models.DateTimeField(auto_now_add=True)
+
+
+class PostBookmark(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    bookmarked_by = models.ForeignKey(User, related_name='bookmarked_posts', on_delete=models.CASCADE, db_index=True)
+    post = models.ForeignKey(Post, related_name='post_bookmarks', on_delete=models.CASCADE, db_index=True)
+    bookmarked_at = models.DateTimeField(auto_now_add=True)

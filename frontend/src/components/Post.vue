@@ -15,17 +15,17 @@
               <p
                 class="flex items-center text-base leading-6 font-medium text-gray-800 dark:text-white"
               >
-                <p
-         S         :to="{
+                <h1
+                  :to="{
                     name: 'profile',
                     params: { id: post.created_by.username },
                   }"
                   >{{ post.created_by.full_name }}
-                </p>
+                </h1>
                 <span
                   class="ml-1 text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
                 >
-                  {{ post.time_since_creation }} 
+                  {{post.created_by.username}} <span> . </span>{{ post.time_since_creation }}
                 </span>
               </p>
             </div>
@@ -45,7 +45,7 @@
       </div>
       <div class="flex">
           <div class="w-full">
-            <div class="flex items-center pl-6">
+            <div class="flex items-center pl-16">
               <!--Like Button-->
               <div
                 @click="handleLikeClick(post.id)"
@@ -156,6 +156,28 @@ export default {
         })
         .catch((error) => {
           console.log("Like Error", error);
+        });
+    },
+
+    handleBookmarkClick(postId) {
+      console.log("Handle bookmark Click");
+
+      axios
+        .post(`api/posts/toggle_post_bookmark/${postId}`)
+        .then((response) => {
+          console.log("bookmark Response", response.data);
+          if (response.data.context == "error") {
+            console.log(" Error " + response.data.message);
+          } else if (response.data.context == "bookmarked") {
+            this.post.bookmarked = true;
+          } else if (response.data.context == "unbookmarked") {
+            this.post.bookmarked = false;
+          } else {
+            console.log("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          console.log("Bookmark Error", error);
         });
     },
   }
