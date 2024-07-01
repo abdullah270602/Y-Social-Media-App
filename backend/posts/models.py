@@ -25,3 +25,10 @@ class BasePost(models.Model):
 
 class Post(BasePost):
     pass
+
+
+class PostLike(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    liked_by = models.ForeignKey(User, related_name='liked_posts', on_delete=models.CASCADE, db_index=True)
+    post = models.ForeignKey(Post, related_name='post_likes', on_delete=models.CASCADE, db_index=True)
+    liked_at = models.DateTimeField(auto_now_add=True)
