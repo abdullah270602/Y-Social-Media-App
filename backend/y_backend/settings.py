@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     # Local Apps
     'accounts',
     'posts',
+    'search',
     
     # Packages
     'rest_framework',
