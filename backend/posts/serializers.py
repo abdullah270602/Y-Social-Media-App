@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.serializers import UserInfoSerializer
-from posts.utlis import has_user_liked_post
+from posts.utlis import has_user_bookmarked_post, has_user_liked_post
 from posts.models import Post, PostLike
 
 class PostSerializers(serializers.ModelSerializer):
@@ -8,10 +8,11 @@ class PostSerializers(serializers.ModelSerializer):
     time_since_creation = serializers.CharField(source='get_time_since_creation', read_only=True)
     liked = serializers.SerializerMethodField()
     like_count = serializers.SerializerMethodField()
+    bookmarked = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ('id', 'body', 'created_by', 'created_at', 'time_since_creation', 'liked', 'like_count', )
+        fields = ('id', 'body', 'created_by', 'created_at', 'time_since_creation', 'liked', 'like_count','bookmarked' )
 
     def get_liked(self, obj):
         current_user = self.context['user_id'] 
@@ -20,3 +21,7 @@ class PostSerializers(serializers.ModelSerializer):
     
     def get_like_count(self,obj):
         return PostLike.objects.filter(post=obj.id).count()
+    
+    def get_bookmarked(self, obj):
+        current_user = self.context['user_id'] 
+        return has_user_bookmarked_post(current_user, obj.id)
