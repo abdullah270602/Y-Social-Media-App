@@ -7,7 +7,8 @@
             <div
               class="flex flex-col h-screen xl:pr-3 dark:bg-dim-900 fixed overflow-y-auto w-68 xs:w-88 xl:w-275"
             >
-              
+            <NavBar></NavBar>
+          
             </div>
           </div>
           <!-- /Left -->
@@ -45,6 +46,8 @@
   import axios from "axios";
   import Post from "../components/Post.vue";
   import CreatePost from "../components/CreatePost.vue";
+  import NavBar from "../components/NavBar.vue";
+
   
   
   export default {
@@ -52,6 +55,7 @@
     components: {
       Post,
       CreatePost,
+      NavBar,
     },
   
     data() {

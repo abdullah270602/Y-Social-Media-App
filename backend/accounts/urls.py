@@ -11,5 +11,4 @@ urlpatterns = [
      path("check-username-exists/", api.check_username_exists, name="check_username_exists"),
      path("verify-email/<uuid:token>", api.verify_email, name="verify_email"),
      path("get-user-info/", api.get_user_info, name="get_user_info"),
-     path("home/", api.home, name="home"),
 ]

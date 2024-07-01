@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SignupView from '../views/SignUpView.vue'
-import HomeView from '@/views/HomeView.vue'
 import EmailSentView from '@/views/EmailSentView.vue'
 import SelectUsername from '@/views/SelectUsername.vue'
 import VerificationSuccessfulView from '@/views/VerificationSuccessfulView.vue'
@@ -26,11 +25,6 @@ const router = createRouter({
       component: SelectUsername
     },
     {
-      path: '/',
-      name: 'Home',
-      component: HomeView
-    },
-    {
       path: '/VerificationSuccessful',
       name: 'VerificationSuccessful',
       component: VerificationSuccessfulView
@@ -41,7 +35,7 @@ const router = createRouter({
       component: SignInView
     },
     {
-      path: '/feed',
+      path: '/',
       name: 'feed',
       component: FeedView
     },

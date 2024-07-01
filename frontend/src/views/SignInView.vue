@@ -9,8 +9,9 @@
         <div class="flex items-center justify-center mb-6">
           <img
             class="w-8 h-8"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+               src="../assets/Y-logo.png"
             alt="logo"
+            style="width: 100px; height: 100px"
           />
         </div>
         <h1
