@@ -30,7 +30,8 @@
       </RouterLink>
 
       <!-- Search tab-->
-      <a
+      <RouterLink
+       :to="{ name: 'search' }"
         class="flex items-center justify-center xl:justify-start text-gray-800 dark:text-white hover:text-blue-400 dark:hover:text-blue-400 mb-8 transition duration-350 ease-in-out"
       >
         <svg fill="currentColor" viewBox="0 0 24 24" class="h-6 w-6">
@@ -42,7 +43,7 @@
           ></path>
         </svg>
         <span class="hidden xl:block ml-4 font-bold text-md">Explore</span>
-      </a>
+      </RouterLink>
       <!-- /Search tab-->
 
       <a
@@ -134,7 +135,7 @@
           <span class="sr-only">Open user menu</span>
           <img
             class="w-8 h-8 me-2 rounded-full"
-            src="https://media.istockphoto.com/id/1419922260/photo/3d-render-of-a-cat-playing-video-games-with-a-vr-headset.webp?b=1&s=170667a&w=0&k=20&c=cOMTzhJgUbE_GRZUturqnUoZff1wEvSaiRNYD3Nc1HQ="
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq5_JvyIL-RDm7skjduw5wJz1hQwk9UimpMA&s"
             alt="user photo"
           />
           {{ userStore.user.name }}

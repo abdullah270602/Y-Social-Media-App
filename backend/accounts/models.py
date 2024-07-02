@@ -80,3 +80,17 @@ class EmailVerification(models.Model):
     @staticmethod
     def generate_token():
         return uuid.uuid4()
+    
+    
+class Followers(models.Model):
+    """
+    Represents the relationship between users where one user is followed by another user.
+   
+        followed_user (ForeignKey to User): The user who is being followed by others.
+        follower (ForeignKey to User): The user who is following other users.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    followed_user = models.ForeignKey(User, related_name='follower_relationships', on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, related_name='following_relationships', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    

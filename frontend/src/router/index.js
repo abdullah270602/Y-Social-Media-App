@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SignupView from '../views/SignUpView.vue'
 import EmailSentView from '@/views/EmailSentView.vue'
-import SelectUsername from '@/views/SelectUsername.vue'
 import VerificationSuccessfulView from '@/views/VerificationSuccessfulView.vue'
 import SignInView from '@/views/SignInView.vue' 
 import FeedView from '@/views/FeedView.vue'
 import SearchView from '@/views/SearchView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,11 +19,6 @@ const router = createRouter({
       path: '/emailSent',
       name: 'emailSent',
       component: EmailSentView
-    },
-    {
-      path: '/selectUsername',
-      name: 'SelectUsername',
-      component: SelectUsername
     },
     {
       path: '/VerificationSuccessful',
@@ -44,6 +39,11 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: SearchView
+    },
+    {
+      path: '/:username',
+      name: 'profile',
+      component: ProfileView
     },
     // {
     //   path: '/about',

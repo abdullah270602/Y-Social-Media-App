@@ -50,3 +50,12 @@ class UserInfoSerializer(serializers.ModelSerializer):
      class Meta:
         model = User
         fields = ['full_name', 'email', 'username','date_of_birth']
+        
+        
+class UserFollowingFollowersSerializerCount(serializers.Serializer):
+    following_count = serializers.IntegerField()
+    followers_count = serializers.IntegerField()   
+        
+        
+class UserFollowingSerializer(serializers.Serializer):
+    following = serializers.ListField()

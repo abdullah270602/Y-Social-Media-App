@@ -7,7 +7,7 @@
             <div>
               <img
                 class="inline-block h-9 w-9 rounded-full"
-                src="https://media.istockphoto.com/id/1419922260/photo/3d-render-of-a-cat-playing-video-games-with-a-vr-headset.webp?b=1&s=170667a&w=0&k=20&c=cOMTzhJgUbE_GRZUturqnUoZff1wEvSaiRNYD3Nc1HQ="
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq5_JvyIL-RDm7skjduw5wJz1hQwk9UimpMA&s"
                 alt=""
               />
             </div>
@@ -15,13 +15,15 @@
               <p
                 class="flex items-center text-base leading-6 font-medium text-gray-800 dark:text-white"
               >
-                <h1
-                  :to="{
-                    name: 'profile',
-                    params: { id: post.created_by.username },
-                  }"
-                  >{{ post.created_by.full_name }}
-                </h1>
+              <h1 class="text-gray-900 dark:text-white font-bold text-sm">
+                      <RouterLink
+                        :to="{
+                          name: 'profile',
+                          params: { username: post.created_by.username },
+                        }"
+                        >{{ post.created_by.full_name }}
+                      </RouterLink>
+                    </h1>
                   <span
                     class="ml-2 text-sm  font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
                   >
@@ -130,6 +132,7 @@
 
 <script>
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
   props: ["post"],

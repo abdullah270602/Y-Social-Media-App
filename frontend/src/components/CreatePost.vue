@@ -6,7 +6,8 @@
       <div class="flex flex-shrink-0 p-4 pb-0">
         <div class="w-12 flex items-top">
           <img class="inline-block h-10 w-10 rounded-full" 
-          src="https://media.istockphoto.com/id/1419922260/photo/3d-render-of-a-cat-playing-video-games-with-a-vr-headset.webp?b=1&s=170667a&w=0&k=20&c=cOMTzhJgUbE_GRZUturqnUoZff1wEvSaiRNYD3Nc1HQ=" alt="" />
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq5_JvyIL-RDm7skjduw5wJz1hQwk9UimpMA&s"
+          alt="" />
         </div>
         <div class="w-full p-2">
           <form action="post">

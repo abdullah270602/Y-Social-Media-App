@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from accounts.models import User
+from accounts.serializers import UserInfoSerializer
 from posts.utlis import has_user_bookmarked_post, has_user_liked_post
 from posts.models import Post, PostBookmark, PostLike
 from posts.serializers import PostSerializers
@@ -67,5 +69,23 @@ def toggle_post_bookmark(request, postId):
             post_bookmark = PostBookmark(bookmarked_by=user, post=post)
             post_bookmark.save()
             return Response({'context': 'bookmarked'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['GET'])
+def get_users_post_list(request, username):
+    try:
+        user = get_object_or_404(User, username=username)
+        posts = Post.objects.filter(created_by=user).order_by('-created_at')
+
+        post_serializer = PostSerializers(posts, many=True, context={'user_id': request.user.id})
+        user_serializer = UserInfoSerializer(user)
+        
+        return Response({'posts': post_serializer.data, 'user': user_serializer.data}, status=status.HTTP_200_OK)
+
+    except User.DoesNotExist:
+        return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
